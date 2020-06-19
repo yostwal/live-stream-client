@@ -7,10 +7,11 @@ class GoogleAuth extends Component {
     window.gapi.load('client:auth2', () => {
       window.gapi.client
         .init({
-          clientId: '<<google_client_id>>',
+          clientId:
+            '440267273238-v80oegt4mk364hchf85pfqrp9nl0j0qe.apps.googleusercontent.com',
           scope: 'email',
         })
-        .then(response => {
+        .then((response) => {
           this.auth = window.gapi.auth2.getAuthInstance();
           this.onAuthChange(this.auth.isSignedIn.get());
           this.auth.isSignedIn.listen(this.onAuthChange);
@@ -18,7 +19,7 @@ class GoogleAuth extends Component {
     });
   }
 
-  onAuthChange = isSignedIn => {
+  onAuthChange = (isSignedIn) => {
     if (isSignedIn) {
       this.props.signIn(this.auth.currentUser.get().getId());
     } else {
@@ -35,7 +36,7 @@ class GoogleAuth extends Component {
   };
 
   renderAuthButton() {
-    console.log(this.props);
+    // console.log(this.props);
     if (this.props.isSignedIn === null) {
       return null;
     } else if (this.props.isSignedIn) {
@@ -53,12 +54,12 @@ class GoogleAuth extends Component {
     }
   }
   render() {
-    console.log('render:::this.props :>> ', this.props);
+    // console.log('render:::this.props :>> ', this.props);
     return <div>{this.renderAuthButton()}</div>;
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return { isSignedIn: state.auth.isSignedIn };
 };
 
